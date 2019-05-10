@@ -82,12 +82,9 @@ void drawBackground()
 	
 	const int16_t top = (camera.getTop() / tileHeight);
 	const int16_t topOffset = (camera.getTop() % tileHeight);
-		
-	const int16_t right = (camera.getRight() / tileWidth);
-	const int16_t bottom = (camera.getBottom() / tileHeight);
 	
-	const int16_t height = (bottom - top);
-	const int16_t width = (right - left);
+	const int16_t height = camera.getHeight();
+	const int16_t width = camera.getWidth();
 	
 	const int16_t yStart = (top > 0) ? 0 : -1;
 	const int16_t xStart = (left > 0) ? 0 : -1;
@@ -117,8 +114,6 @@ void drawBackground()
 		arduboy.setCursor(0, 0);	
 		arduboy << F("L ") << left << ' ' << leftOffset << '\n';
 		arduboy << F("T ") << top << ' ' << topOffset << '\n';
-		arduboy << F("R ") << right << '\n';
-		arduboy << F("B ") << bottom << '\n';
 	}
 }
 
