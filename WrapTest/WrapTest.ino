@@ -19,6 +19,7 @@
 Arduboy2 arduboy;
 
 #include "Images.h"
+#include "Utilities.h"
 
 struct Camera
 {
