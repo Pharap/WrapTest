@@ -77,22 +77,25 @@ void drawBackground()
 	constexpr int16_t tileWidth = backgroundWidth;
 	constexpr int16_t tileHeight = backgroundHeight;
 	
-	const int16_t left = (camera.getLeft() / tileWidth);
+	const int16_t leftTileIndex = (camera.getLeft() / tileWidth);
 	const int16_t leftOffset = (camera.getLeft() % tileWidth);
 	
-	const int16_t top = (camera.getTop() / tileHeight);
+	const int16_t topTileIndex = (camera.getTop() / tileHeight);
 	const int16_t topOffset = (camera.getTop() % tileHeight);
+		
+	const int16_t rightTileIndex = (camera.getRight() / tileWidth);
+	const int16_t bottomTileIndex = (camera.getBottom() / tileHeight);
 	
-	const int16_t height = camera.getHeight();
-	const int16_t width = camera.getWidth();
+	const int16_t verticalTiles = (bottomTileIndex - topTileIndex);
+	const int16_t horizontalTiles = (rightTileIndex - leftTileIndex);
 	
-	const int16_t yStart = (top > 0) ? 0 : -1;
-	const int16_t xStart = (left > 0) ? 0 : -1;
+	const int16_t yStart = ((topTileIndex > 0) ? 0 : -1);
+	const int16_t xStart = ((leftTileIndex > 0) ? 0 : -1);
 	
-	for(int16_t y = yStart; y <= height; ++y)
+	for(int16_t y = yStart; y <= verticalTiles; ++y)
 	{
 		const int16_t drawY = ((y * tileHeight) - topOffset);
-		for(int16_t x = xStart; x <= width; ++x)
+		for(int16_t x = xStart; x <= horizontalTiles; ++x)
 		{
 			const int16_t drawX = ((x * tileWidth) - leftOffset);
 			
@@ -112,8 +115,8 @@ void drawBackground()
 	if(debugDraw)
 	{
 		arduboy.setCursor(0, 0);	
-		arduboy << F("L ") << left << ' ' << leftOffset << '\n';
-		arduboy << F("T ") << top << ' ' << topOffset << '\n';
+		arduboy << F("L ") << leftTileIndex << ' ' << leftOffset << '\n';
+		arduboy << F("T ") << topTileIndex << ' ' << topOffset << '\n';
 	}
 }
 
