@@ -86,16 +86,16 @@ void drawBackground()
 	const int16_t rightTileIndex = (camera.getRight() / tileWidth);
 	const int16_t bottomTileIndex = (camera.getBottom() / tileHeight);
 	
-	const int16_t verticalTiles = (bottomTileIndex - topTileIndex);
-	const int16_t horizontalTiles = (rightTileIndex - leftTileIndex);
+	const int16_t endY = (bottomTileIndex - topTileIndex);
+	const int16_t endX = (rightTileIndex - leftTileIndex);
 	
-	const int16_t yStart = ((topTileIndex > 0) ? 0 : -1);
-	const int16_t xStart = ((leftTileIndex > 0) ? 0 : -1);
+	const int16_t startY = ((topTileIndex > 0) ? 0 : -1);
+	const int16_t startX = ((leftTileIndex > 0) ? 0 : -1);
 	
-	for(int16_t y = yStart; y <= verticalTiles; ++y)
+	for(int16_t y = startY; y <= endY; ++y)
 	{
 		const int16_t drawY = ((y * tileHeight) - topOffset);
-		for(int16_t x = xStart; x <= horizontalTiles; ++x)
+		for(int16_t x = startX; x <= endX; ++x)
 		{
 			const int16_t drawX = ((x * tileWidth) - leftOffset);
 			
